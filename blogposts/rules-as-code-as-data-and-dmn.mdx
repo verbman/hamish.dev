@@ -1,0 +1,54 @@
+---
+layout: post
+title:  "Rules-as-code-as-data and DMN."
+author: Hamish
+date: "2021-03-31"
+categories: [ Planning rules, Rules as code, Dmn, Technical ]
+image: /assets/images/dmn-visual-code.png
+imagealt: "Actual DMN file loaded in Visual Code with DMN Editor plugin"
+excerpt: ""
+featured: false
+---
+
+18 months ago we were looking at the RuBRIC project with the Wellington City Council and planning to code the rules contained in their district plan.
+
+From previous projects I knew that there’s a fair amount of work involved in deducing the logic, writing the code, validating/testing the code and documenting a clear set of references back to the natural language rules.
+As such I didn’t want this rule logic to end up tied to one particular programming language. To best hedge our work for the future and make it more widely usable my hope was could we store the logic in a way that it could be implemented in multiple languages, on multiple platforms.
+
+There are quite a few options in this space:
+
+* source-to-source compiler (transpilers), 
+* different implementations of pure data stores that capture logic and require “engines” to convert the data into executable logic. 
+* standards for capturing logic
+* fall back to one API endpoint which “rules them all” but leaves the logic bound in darkness.
+
+We ended up choosing the [DMN standard](https://www.omg.org/dmn/) which is managed by I kid you not (this never gets old) the [OMG Group](https://www.omg.org/). They're a very serious group responsible for a number of world leading business rules standards, but OMG!
+So the DMN standard is an xml file based standard that captures inputs and decision logic and *is meant* to require a skill level similar to excel. 
+
+So we ended up with lots of these DMN files, named things like _Earthworks.dmn_ and _InitialFilterQuestions.dmn_. 
+This was surprisingly not-that-painful and also allows us to use [git](https://git-scm.com/) for versioning. There were quite a few architectural decisions about how we organised the logic, and some of the limitations of the DMN format itself meant some files got too complicated and had to be broken up. 
+
+It also meant I was able to train a non-programmer to create the DMN files using a dmn editor. 
+
+We opted for the <s>Guvnor</s>, <s>Drools</s>, <s>jBPM</s>, Business Central (just stop with the renaming - Guvnor would've been best for googling answers) tool suite that included a web based editing and management system for the dmn files. This got us through to production but now I want to realise the dream that is the standard and get our hard work working in other environments.
+
+ > On that note, while DMN requires a technical skill level similiar to excel - it still needs the person working with the standard to be able to think structurally or architecturally to ensure clean, well-designed dmn files. It’s identical to the types of problems you come across when structuring code which means programmers are well trained in this. I would recommend for any serious project, do the initial structural design with a programmer and then train a non-programmer to work within the framework the programmer set up.
+
+The image at the top of this post is a DMN file in [Visual Code](https://code.visualstudio.com/) viewed with the DMN editor extension.
+
+Yes, there’s also js implementations of dmn editors!! Here’s one I can embed on this very page from [https://demo.bpmn.io/dmn/s/check-order](https://demo.bpmn.io/dmn/s/check-order)
+<iframe src="https://demo.bpmn.io/dmn/s/check-order" style="width:100%;height:500px;border:solid 1px #000;"></iframe>
+
+_You can edit the above dmn file_
+
+Most of the DMN implementations are built on the same java base libraries, so I went looking for non java options and am now playing in a .net core docker container trying to get [https://github.com/adamecr/Common.DMN.Engine](https://github.com/adamecr/Common.DMN.Engine) working with some of the council files. 
+My current goal being a lightweight transportable execution engine with dmn parser (.net core runs on basically anything) which I can then leverage for the next experiments I want to conduct. Wish me luck!
+
+Additional quick notes on DMN:
+
+ * DMN has versions, at time of writing the latest is 1.3.
+ * It supports expressions and by default it utilises _Friendly Enough Expression Language_ (FEEL)
+ * DMN includes conformance levels of 1, 2 or 3. Tools should indicate which they support.
+ * The full featured conformance level is 3 and has full support for FEEL.
+ * Conformance level 2 supports S-FEEL (_simple Friendly Enough Expression Language_) rather than FEEL
+ * Conformance level 1 means decision models are not executable.

@@ -1,0 +1,10 @@
+ul.wrapper li {
+  text-align: center;
+}
+
+@media (max-width:991px) {
+  ul.wrapper li a:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+
+  }
+}

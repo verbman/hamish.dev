@@ -1,0 +1,32 @@
+.searchwrap {
+  position: relative;
+}
+
+.list {
+  margin-top: 0.5em;
+  box-shadow: 5px 15px 15px 0px rgba(0, 0, 0, 0.4);
+}
+
+@media only screen and (max-width: 991px) {
+  .searchwrap {
+    margin-top: 0.4em;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .searchwrap input {
+    border-radius: 0px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .list {
+    position: absolute;
+    margin-left: -9em;
+    width: 20em;
+  }
+
+  .searchwrap input {
+    border-radius: 30px;
+  }
+}

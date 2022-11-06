@@ -1,0 +1,49 @@
+---
+layout: post
+title:  “Show your working”
+author: Hamish
+date: "2021-04-20"
+categories: [ Rules as code, Open interpretation, Submission ]
+image: /assets/images/working.jpg
+imagealt: "Show your working"
+excerpt: "The idea is that we move towards requiring all public institutions tasked with implementing government services to provide public reference implementations of their interpretation of the law that governs them."
+featured: false
+---
+
+<small>Submitted (follow the link to vote) to the [Open Government Partnership](https://www.opengovpartnership.nz/transparency-and-accountability/show-your-working)</small> on the 21/04/2021.
+
+### What is my idea?
+
+This idea sits on the back of the recently released [“Legislation as Code” (2021)](https://hamish.dev/research/lac/index) report and directly impacts a wide range of aspects for the government with a focus on increasing trust and transparency.
+
+> The idea is that we move towards requiring all public institutions tasked with implementing government services to provide public reference implementations of their interpretation of the law that governs them.
+
+I appreciate for the uninitiated this idea seems fanciful and begs the question, who would ever read such reference implementations? At this point I want to point to an existing project I was involved with in the Wellington City Council that goes some way to illustrate the idea already in practice.
+
+Recently the WCC released [https://consentcheck.wcc.govt.nz](https://consentcheck.wcc.govt.nz)
+ 
+The site linked isn’t a reference implementation, however it’s a tool that’s utilising a reference implementation of some sections of the council’s district plan. The reference implementation is stored in a format that computers can execute, it’s a logical expression of what the plan states that maps back to the natural language plan we can all read. Unfortunately, in this situation the reference implementation isn’t yet published - however the way it’s been built is designed to allow for this at a later date. 
+
+The purpose of the reference implementations isn’t to allow the general public to easily understand how the law is interpreted. Their purpose is to allow both public bodies, community groups and businesses to build software tools like the above Consent Check tool that takes the interpretation and allows people to apply it to their circumstance. Such tools ideally should allow users to drill in directly to the natural language text that affects them. Such tools can then be developed both inside and outside of government (i.e. a step towards _government-as-a-platform_).
+
+Ideally such reference implementations would form the base layer for government internal systems so that they were both reference and operational implementations.
+
+I’ve been calling this concept **“Open Interpretation”**, it represents a fundamental shift away from the gate keeping that can happen around legal interpretation within government departments which is often couched in a concern of getting things wrong and then avoiding fault. Such a practice as described side-steps this demand by front-footing the interpretation work required of such departments by  asking them to “show their working”.
+
+When published, such reference implementations should allow for and encourage drafts, feedback, “bug reports”, versioning and public discussion. This is critical to achieving the overall objectives of highly reliable interpretations ( see [https://hamish.dev/research/lac/part-four#highly-reliable-interpretations-are-valuable](https://hamish.dev/research/lac/part-four#highly-reliable-interpretations-are-valuable) )
+
+Now I have described the concept I acknowledge there is a lot of work to be done to get there. So my recommendation is the same as in the aforementioned report, that a multi-stakeholder incubator should be founded and funded. (see [https://hamish.dev/research/lac/part-five#para462](https://hamish.dev/research/lac/part-five#para462) )
+
+### Why this idea is important.
+
+One of the three principles behind the rule of law is that “The law should be clear, and clearly enforceable” (see [http://www.ldac.org.nz/](http://www.ldac.org.nz/guidelines/legislation-guidelines-2018-edition/constitutional-issues-and-recognising-rights/chapter-4/)). Recognising that the law today is complex and interlocking and that we can leverage computers to do the heavy lifting to help us all comprehend how the law applies to us is precisely the sort of information based activity that computers do well at. This helps move us towards a society where the law is more accessible.
+
+The cultural impacts on departments having their interpretation work in the open is likely to make collaboration with non-government entities more straightforward.
+
+It also clarifies their role of serving the community in the act of interpreting the law and in doing so gives the community an active role and voice in this fundamental work of interpreting and applying the law.
+
+In considering OIA requests, a lot of them at a fundamental level are focused on how a law has been interpreted and applied, publishing operational implementations would remove a lot of the demand on the OIA system or at the very least lead to better informed requests.
+
+It would allow for incorrect interpretations to be more quickly identified and reference implementations to be updated (and versioned). For example this recent situation ( [https://www.stuff.co.nz/national/300008724/work-and-income-acts-unlawfully-over-benefits-and-redundancy-payments](https://www.stuff.co.nz/national/300008724/work-and-income-acts-unlawfully-over-benefits-and-redundancy-payments) ) could have been corrected more quickly. Arguably the process of publishing their reference implementation might well have caught the issue before it came into effect.
+
+Technically it would encourage departments to implement computer systems that were well structured with business rule systems that clearly map to the hierarchy of rules that guide them. Such mapping is already underway in some form in many departments, this idea asks them to take it one further step.

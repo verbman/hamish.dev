@@ -271,13 +271,6 @@ section.recent-posts {
   line-height: 1.25;
 }
 
-.listfeaturedtag h4.card-text,
-.listrecent h4.card-text {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  font-weight: 400;
-}
-
 .featured-box-img-cover {
   object-fit: cover;
   width: 100%;

@@ -2,6 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
   publicRuntimeConfig: {
     title: 'Hamish Fraser',
     description: "I write bugs, sometimes they write back.",

@@ -27,7 +27,7 @@ export default function PostBox({ post, layout }: { post: BlogPost, layout: Layo
           <h2 className="card-title">
             <Link className={(layout.mode ? 'text-light' : 'text-dark') + ` p-name`} href={post.data.link}>{post.data.title}</Link>
           </h2>
-          <h4 className="card-text p-summary">{subtext}</h4>
+          <p className="card-text p-summary">{subtext}</p>
         </div>
         {a && <div className="card-footer">
           <div className="wrapfooter">

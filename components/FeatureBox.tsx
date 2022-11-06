@@ -35,7 +35,7 @@ export default function FeatureBox({ post, buttonText, layout }: { post: BlogPos
                   <h2 className="card-title">
                     <Link className={(layout.mode ? 'text-light' : 'text-dark') + ` p-name`} href={post.data.link}>{post.data.title}</Link>
                   </h2>
-                  <h4 className="card-text p-summary">{subtext}</h4>
+                  <p className="card-text p-summary">{subtext}</p>
                   {buttonText && <a href={post.data.link} className="btn btn-info">{buttonText}</a>}
                 </div>
                 {a && <div className="card-footer b-0 mt-auto">

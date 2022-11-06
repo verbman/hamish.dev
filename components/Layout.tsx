@@ -12,7 +12,7 @@ export default function Layout({ children, layout }: {
   return (
     <>
       <Head>
-        <title>{publicRuntimeConfig.title} | {publicRuntimeConfig.description}</title>
+        <title>{publicRuntimeConfig.title + ' : ' + publicRuntimeConfig.description}</title>
         <meta name="generator" content="NextJS" />
         <meta property="og:title" content={publicRuntimeConfig.title} />
         <meta property="og:locale" content="en_US" />

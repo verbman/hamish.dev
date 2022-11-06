@@ -32,6 +32,7 @@ class MyDocument extends Document<SiteDocumentInitialProps> {
         <body className={this.props.mode}>
           <Main />
           <NextScript />
+          <a rel="me" href="https://mastodon.nz/@verbman" style={{display:'none'}}>@verbman</a>
         </body>
       </Html>
     )

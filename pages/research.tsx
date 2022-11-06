@@ -15,7 +15,7 @@ export default function Research({ layout }: { layout: LayoutMode }) {
       image: "/assets/images/report_web_home.png",
       imagealt: "Legislation as Code [Web]",
       excerpt: "Opportunities, risks, and recommendations",
-      link: "https://hamish.dev/research/lac",
+      link: "https://hamish.dev/research/lac/",
       slug: "",
       featured: false
     },

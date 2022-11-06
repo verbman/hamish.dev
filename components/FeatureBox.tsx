@@ -43,7 +43,7 @@ export default function FeatureBox({ post, buttonText, layout }: { post: BlogPos
                       <AuthorAvatar author={a} />
                     </span>
                     <span className="author-meta">
-                      <span className="post-name"><a target="_blank" rel="noreferrer" href={a.web}>{a.display_name}</a></span><br />
+                      <span className="post-name"><a href={a.web}>{a.display_name}</a></span><br />
                       <span className="post-date">{nicecate}</span>
                     </span>
                     <span className="post-read-more"><a href={post.data.link} title="Read Post"><ReadMore width={25} height={25} className={"readmore"} color={layout.mode ? '#FFF' : '#111'} /></a></span>

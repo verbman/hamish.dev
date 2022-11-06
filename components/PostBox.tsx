@@ -34,7 +34,7 @@ export default function PostBox({ post, layout }: { post: BlogPost, layout: Layo
               <AuthorAvatar author={a} />
             </span>
             <span className="author-meta">
-              <span className="post-name"><a target="_blank" rel="noreferrer" href={a.web}>{a.display_name}</a></span><br />
+              <span className="post-name"><a href={a.web}>{a.display_name}</a></span><br />
 
               <span className="post-date">{nicecate}</span>
             </span>

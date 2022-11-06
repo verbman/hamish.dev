@@ -1,0 +1,12 @@
+[[redirects]]
+  from = "/research/lac"
+  to = "/research/lac/index"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/research/lac/*"
+  to = "https://lac.hamish.dev/:splat"
+  status = 200
+  force = true # COMMENT: ensure that we always redirect
+  headers = {X-From = "Netlify"}

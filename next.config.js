@@ -26,6 +26,10 @@ const nextConfig = {
         source: '/feed.xml',
         destination: '/api/rss',
       },
+      {
+        source: '/.well-known/webfinger',
+        destination: '/api/webfinger',
+      }
     ]
   },
   webpack: (config, context) => {

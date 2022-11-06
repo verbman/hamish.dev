@@ -1,6 +1,5 @@
 export type LayoutMode = {
   mode: boolean;
-  wait: boolean;
   switch: (event: React.FormEvent<HTMLInputElement>) => void;
 };
 

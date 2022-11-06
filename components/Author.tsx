@@ -34,10 +34,10 @@ export default function Author({ author }: { author: string }) {
     comp: Mastodon
   }
 
-  return (<div className="row post-top-meta">
+  return (<div className="row post-top-meta p-author h-card">
     <div className="col-xs-12 col-md-2 col-lg-1 text-md-left mb-4 mb-md-0 authoravatar"><AuthorAvatar author={a} /></div>
     <div className="col-xs-12 col-md-9 col-lg-10 text-md-left">
-      <Link className="author-name" href={a.web}>{a.display_name}</Link>
+      <Link className="author-name p-name u-url" href={a.web}>{a.display_name}</Link>
       <SvgLink props={mastordonIcon} />
       <SvgLink props={twitterIcon} />
       <span className="author-description">{a.description}</span>

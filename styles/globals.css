@@ -98,6 +98,8 @@ main.container {
   margin-bottom: 5px;
 }
 
+h2 span em {font-style: normal;}
+
 /* 
 Template Name: Mediumish 
 Copyright: Sal, WowThemes.net, https://www.wowthemes.net 

@@ -7,8 +7,7 @@ import { useState, useEffect } from "react"
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const [darkmode, setDarkmode] = useState(false);
-  const [waitForDraw, setWaitForDraw] = useState(true);
+  const [darkmode, setDarkmode] = useState(true);
 
   useEffect(() => {
     const cookie = getCookie('reader')
@@ -16,18 +15,16 @@ export default function App({ Component, pageProps }: AppProps) {
       const reader = JSON.parse(cookie as string);
       if (reader.mode) {
         if (reader.mode === "dark") {
-          setDarkmode(true);// matches const [darkmode, setDarkmode] = useState(true);
           document?.querySelector("body")?.classList.remove("light");
           document?.querySelector("body")?.classList.add("dark");
         } else {
+          setDarkmode(false);// reverse the default const [darkmode, setDarkmode] = useState(true);
           document?.querySelector("body")?.classList.remove("dark");
           document?.querySelector("body")?.classList.add("light");
         }
-        setWaitForDraw(false);
       }
     } else {
-      setDarkmode(false);
-      setWaitForDraw(false);
+      setDarkmode(true);
     }
   }, []);
 
@@ -58,7 +55,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   pageProps.layout = {
     mode: darkmode,
-    wait: waitForDraw,
     switch: darkModeSwitch
   }
   return <Component {...pageProps} />

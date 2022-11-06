@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { BlogPost } from '../lib/types'
 import feed from '../public/data/feed.json'
 import dateFormat from "dateformat"
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, Dispatch, SetStateAction } from "react"
 import styles from '../styles/Search.module.css'
 
-export default function Search({ mode }: { mode: boolean }) {
+export default function Search({ mode, closeMenu }: { mode: boolean, closeMenu: Dispatch<SetStateAction<boolean>> }) {
   const ref = useRef() as React.MutableRefObject<HTMLInputElement>;
   const [query, setQuery] = useState("");
   const [dropdown, setDropdown] = useState(false);
@@ -31,12 +31,19 @@ export default function Search({ mode }: { mode: boolean }) {
     if (ref.current && !ref.current.contains(e.target as Node)) {
       setQuery('');
       setDropdown(false);
+    } else {
+      if((e.target as Element).className.indexOf('result') > -1){
+        setQuery('');
+        setDropdown(false);
+        closeMenu(false);
+      }
     }
   }
 
   useEffect(() => {
     document.addEventListener("click", eventCatch);
     return () => document.removeEventListener('click', eventCatch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -60,7 +67,7 @@ export default function Search({ mode }: { mode: boolean }) {
 
       {<div className={`list-group ` + styles.list}>
         {tempPosts.map((post, index) => {
-          return <Link key={index} className={`list-group-item ` + (mode ? 'list-group-item-dark' : '')} href={post.data.link}>{post.data.title}<br /><em>({dateFormat(post.data.date, "dS mmmm, yyyy")})</em></Link>
+          return <Link key={index} className={`result list-group-item ` + (mode ? 'list-group-item-dark' : '')} href={post.data.link}>{post.data.title}<br /><em>({dateFormat(post.data.date, "dS mmmm, yyyy")})</em></Link>
         })}
       </div>}
     </div>

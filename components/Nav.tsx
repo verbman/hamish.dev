@@ -27,7 +27,7 @@ export default function Nav({ mode }: { mode: boolean }) {
           <Link className="nav-link" href="/research">Research</Link>
         </li>
       </ul>
-      <Search mode={mode} />
+      <Search mode={mode} closeMenu={setOpennav} />
     </div>
   </>);
 }

@@ -22,9 +22,9 @@ export default function Category({ category, layout }: { category: Tag, layout: 
     <Layout layout={layout}>
       <div className="container drop">
         <div className="row">
-          <section className="recent-posts">
+          <section className="recent-posts h-feed">
             <div className="section-title">
-              <h2><span>Category: {category.name}</span></h2>
+              <h2><span>Category: <em className="p-name">{category.name}</em></span></h2>
             </div>
             <div className="row listrecent">
               {posts && posts.map((p: BlogPost, index: number) => {

@@ -13,23 +13,9 @@ export default function Layout({ children, layout }: {
     <>
       <Head>
         <title>{publicRuntimeConfig.title + ' : ' + publicRuntimeConfig.description}</title>
-        <meta name="generator" content="NextJS" />
-        <meta property="og:title" content={publicRuntimeConfig.title} />
-        <meta property="og:locale" content="en_US" />
-        <meta name="description" content={publicRuntimeConfig.description} />
-        <meta property="og:description" content={publicRuntimeConfig.description} />
-        <link rel="canonical" href={publicRuntimeConfig.url} />
-        <meta property="og:url" content={publicRuntimeConfig.url}  />
-        <meta property="og:site_name" content={publicRuntimeConfig.title} />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary" />
-        <meta property="twitter:title" content={publicRuntimeConfig.title} />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="alternate" type="application/rss+xml" title={`RSS Feed for `+publicRuntimeConfig.url} href="/feed.xml" />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: `{"@context":"https://schema.org","@type":"WebSite","description":"`+publicRuntimeConfig.description+`","headline":"`+publicRuntimeConfig.title+`","name":"`+publicRuntimeConfig.title+`","url":"`+publicRuntimeConfig.url+`"}` }} />
       </Head>
-      {!layout.wait && <HeadBar {...layout} />}
-      {!layout.wait && <main className={`container mx-auto flex-1 ` + (layout.mode ? 'text-light' : 'text-dark')}>
+      <HeadBar {...layout} />
+      <main className={`container mx-auto flex-1 ` + (layout.mode ? 'text-light' : 'text-dark')}>
         <div className='darkmode'>
           <div className="form-check form-switch">
             <input className="form-check-input" type="checkbox" checked={layout.mode} id="flexSwitchCheckDefault" onChange={layout.switch} />
@@ -37,8 +23,8 @@ export default function Layout({ children, layout }: {
           </div>
         </div>
         {children}
-      </main>}
-      {!layout.wait && <Footer {...layout} />}
+      </main>
+      <Footer {...layout} />
     </>
   );
 }

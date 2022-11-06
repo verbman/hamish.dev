@@ -13,7 +13,7 @@ export default function Categories({ categories }: { categories: string[] }) {
   return (<div className="after-post-cats">
     <ul className="tags mb-4">
       {cats.map((cat: Tag, index: number) => {
-        return <li key={index}><Link className="smoothscroll" href={`/category/` + cat.slug}>{cat.name}</Link></li>
+        return <li key={index}><Link className="smoothscroll p-category" href={`/category/` + cat.slug}>{cat.name}</Link></li>
       })}
     </ul>
   </div>

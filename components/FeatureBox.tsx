@@ -9,13 +9,14 @@ import ReadMore from './icons/ReadMore'
 
 export default function FeatureBox({ post, buttonText, layout }: { post: BlogPost, buttonText: string, layout: LayoutMode }) {
   const date = (post.data && post.data.date) ? new Date(post.data.date) : new Date();
+  const datetime = dateFormat(date, "yyyy-mm-dd'T'HH:MM:sso");
   const nicecate = dateFormat(date, "dS mmmm, yyyy");
 
   const subtext = (post.data.excerpt.length > 80) ? post.data.excerpt.replace(/^(.{100}[^\s]*).*/, "$1") + '…' : post.data.excerpt;
   const a = (post.data.author) ? publicRuntimeConfig.authors[post.data.author] : false;
 
   return (
-    <div className="col-md-6 mb-30px">
+    <div className="col-md-6 mb-30px h-entry">
       <div className="listfeaturedtag h-100">
         <div className="row">
           <div className="col-12 col-md-12 col-lg-5 pr-lg-0 pe-lg-0">
@@ -32,9 +33,9 @@ export default function FeatureBox({ post, buttonText, layout }: { post: BlogPos
               <div className={`card rounded-0 ` + (layout.mode ? 'bg-dark' : '') + ` rounded-lg-end`}>
                 <div className="card-body">
                   <h2 className="card-title">
-                    <Link className={layout.mode ? 'text-light' : 'text-dark'} href={post.data.link}>{post.data.title}</Link>
+                    <Link className={(layout.mode ? 'text-light' : 'text-dark') + ` p-name`} href={post.data.link}>{post.data.title}</Link>
                   </h2>
-                  <h4 className="card-text">{subtext}</h4>
+                  <h4 className="card-text p-summary">{subtext}</h4>
                   {buttonText && <a href={post.data.link} className="btn btn-info">{buttonText}</a>}
                 </div>
                 {a && <div className="card-footer b-0 mt-auto">
@@ -43,10 +44,10 @@ export default function FeatureBox({ post, buttonText, layout }: { post: BlogPos
                       <AuthorAvatar author={a} />
                     </span>
                     <span className="author-meta">
-                      <span className="post-name"><a href={a.web}>{a.display_name}</a></span><br />
-                      <span className="post-date">{nicecate}</span>
+                      <span className="post-name"><a className="p-author h-card u-url" href={a.web}>{a.display_name}</a></span><br />
+                      <time className="post-date dt-published" dateTime={datetime}>{nicecate}</time>
                     </span>
-                    <span className="post-read-more"><a href={post.data.link} title="Read Post"><ReadMore width={25} height={25} className={"readmore"} color={layout.mode ? '#FFF' : '#111'} /></a></span>
+                    <span className="post-read-more"><a className='u-url' href={publicRuntimeConfig.url + post.data.link} title="Read Post"><ReadMore width={25} height={25} className={"readmore"} color={layout.mode ? '#FFF' : '#111'} /></a></span>
                     <div className="clearfix"></div>
                   </div>
                 </div>}

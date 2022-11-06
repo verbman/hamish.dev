@@ -6,6 +6,7 @@ const handler = nc();
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
 
+    // See https://mastodon.nz/.well-known/webfinger?resource=acct:verbman@mastodon.nz
     const webfinger = `{
   "subject":"acct:verbman@mastodon.nz",
   "aliases": [

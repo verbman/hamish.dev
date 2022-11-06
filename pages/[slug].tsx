@@ -17,30 +17,30 @@ interface Params extends ParsedUrlQuery {
 
 export default function Blog({ post, prevNext, layout }: { post: BlogPost, prevNext: PrevNext, layout: LayoutMode }) {
   const date = (post.data && post.data.date) ? new Date(post.data.date) : new Date();
-  const datetimer = dateFormat(date, "yyyy-mm-dd");
+  const datetimer = dateFormat(date, "yyyy-mm-dd'T'HH:MM:sso");
   const nicecate = dateFormat(date, "dS mmmm, yyyy");
 
   var img = (post.data.image) ? <Image fill={true} priority={true} src={post.data.image} alt={post.data.imagealt} /> : <></>;
 
   return (
     <Layout layout={layout}>
-      <div className="container drop">
+      <div className="container drop ">
         <div className="row">
           <div className="col-md-2 pl-0">
             <Share page={post.data} layout={layout} />
           </div>
-          <div className="col-md-9 flex-first flex-md-unordered">
+          <div className="col-md-9 flex-first flex-md-unordered h-entry">
             <div className="mainheading">
               {post.data.author && <Author author={post.data.author} />}
-              <h1 className="posttitle">{post.data.title}</h1>
+              <h1 className="posttitle p-name">{post.data.title}</h1>
             </div>
 
             <div className="featured-image img-fluid">{img}</div>
 
-            <div className='article-post' dangerouslySetInnerHTML={{ __html: marked.parse(post.content) }}></div>
+            <div className="article-post e-content" dangerouslySetInnerHTML={{ __html: marked.parse(post.content) }}></div>
 
             <p>
-              <small><span className="post-date"><time className="post-date" dateTime={datetimer}>{nicecate}</time></span></small>
+              <small><span className="post-date"><time className="post-date dt-published" dateTime={datetimer}>{nicecate}</time></span></small>
             </p>
 
             {post.data.categories.length > 0 && <Categories categories={post.data.categories} />}

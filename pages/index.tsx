@@ -8,9 +8,9 @@ import PostBox from '../components/PostBox'
 import CaretUp from '../components/icons/CaretUp'
 import feed from '../public/data/feed.json'
 
-export default function Home({ posts, layout }: { posts: BlogPost[], layout: LayoutMode }) {
+export default function Home({ layout }: { layout: LayoutMode }) {
 
-  const fposts = posts.filter(post => {
+  const fposts = feed.posts.filter(post => {
     return post.data.featured;
   });
 
@@ -18,7 +18,7 @@ export default function Home({ posts, layout }: { posts: BlogPost[], layout: Lay
   //  return !post.data.featured;
   //}).slice(0, 6);
 
-  const nposts = posts.slice(0, 6);
+  const nposts = feed.posts.slice(0, 6);
 
   return (
     <Layout layout={layout}>
@@ -29,9 +29,9 @@ export default function Home({ posts, layout }: { posts: BlogPost[], layout: Lay
             {publicRuntimeConfig.description}
           </p>
         </div>
-        <section className="featured-posts">
+        <section className="featured-posts h-feed">
           <div className="section-title">
-            <h2><span>Featured</span></h2>
+            <h2><span className="p-name">Featured</span></h2>
           </div>
           <div className="row">
             {fposts && fposts.map((p: BlogPost, index: number) => {
@@ -39,9 +39,9 @@ export default function Home({ posts, layout }: { posts: BlogPost[], layout: Lay
             })}
           </div>
         </section>
-        <section className="recent-posts">
+        <section className="recent-posts h-feed">
           <div className="section-title">
-            <h2><span>All Posts</span></h2>
+            <h2><span className="p-name">All Posts</span></h2>
           </div>
           <div className="row listrecent">
             {nposts && nposts.map((p: BlogPost, index: number) => {
@@ -56,12 +56,4 @@ export default function Home({ posts, layout }: { posts: BlogPost[], layout: Lay
       </div>
     </Layout>
   )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  return {
-    props: {
-      posts: feed.posts
-    }
-  }
 }

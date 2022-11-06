@@ -1,4 +1,10 @@
 [[redirects]]
+  from = "/research/lac"
+  to = "/research/lac/index"
+  status = 301
+  force = false
+
+[[redirects]]
   from = "/research/lac/*"
   to = "https://lac.hamish.dev/:splat"
   status = 200

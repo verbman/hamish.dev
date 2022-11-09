@@ -7,10 +7,10 @@ import feed from '../../../public/data/feed.json';
 
 const handler = nc();
 
-handler.get(async (res: NextApiResponse) => {
+handler.get(async (req, res: NextApiResponse) => {
   try {
     const postItems = (feed.posts as BlogPost[]).map((page: BlogPost) => {
-      const url = `${publicRuntimeConfig.url}/${page.filePath.replace('.mdx', '')}`;
+      const url = `${publicRuntimeConfig.url}/${page.filePath.replace('.mdx', '').replace('.md', '')}`;
 
       return `<item>
         <title>${page.data.title}</title>
@@ -48,7 +48,7 @@ handler.get(async (res: NextApiResponse) => {
       throw e;
     }
 
-    return res.status(500).json({ error: e.message || '' });
+    //return res.status(500).json({ error: e.message || '' });
   }
 });
 

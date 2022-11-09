@@ -10,7 +10,7 @@ const generateJson = async () => {
     .map((filePath) => {
       const source = fs.readFileSync(path.join(POSTS_DIR, filePath));
       const { content, data } = matter(source);
-      data.slug = filePath.replace(".mdx", "");
+      data.slug = filePath.replace(".mdx", "").replace(".md", "");
       data.link = '/' + data.slug;
       return {
         content,

@@ -10,7 +10,7 @@ export default function DSA({ layout }: { layout: LayoutMode }) {
   }
   
 
-  let output= '',eleclass='',elelist = '',elelistclose = '',olclass='',datalistno = '',elementClose = '';//
+  let output= '',eleclass='',elelist = '',elelistclose = '',olclass='',datalistno = '',elementClose = '',prefootnote='';//
   var i = 0;
   var lastIndent: number = 0;
   var thisIndent: number = 0;
@@ -51,11 +51,13 @@ export default function DSA({ layout }: { layout: LayoutMode }) {
         elementClose += elementCloseSet.pop();
       }
     }
+    prefootnote = ( dsa[i].part === 'footnote' ) ? '('+dsa[i].id+') ' : '';
+
 
 
     // note: we are adding a key prop here to allow react to uniquely identify each
     // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-    output+=(elelistclose+'<'+swapPForDiv(dsa[i].element)+eleclass+datalistno+' key="'+i+'" id="'+dsa[i].id+'">'+dsa[i].content+elementClose+elelist);
+    output+=(elelistclose+'<'+swapPForDiv(dsa[i].element)+eleclass+datalistno+' key="'+i+'" id="'+dsa[i].id+'">'+prefootnote+dsa[i].content+elementClose+elelist);
     i++;
   }
 
@@ -74,14 +76,30 @@ export default function DSA({ layout }: { layout: LayoutMode }) {
             margin-bottom: 1rem;
             position:relative;
           }
-          .act div:hover:after,.act li:hover:after{
+          
+          /* id hover state */
+          h1,h2,h3,h4,h5,h6{
+            position:relative;
+          }
+          .act div:hover:after,.act li:hover:after,.act h1:hover:after,.act h2:hover:after,.act h3:hover:after,.act h4:hover:after,.act h5:hover:after{
             content: "#" attr(id);
             position:absolute;
-            right:0;
-            top:-2em;
+            right: 0em;
+            top: -2.2em;
             display:block;
-            background-color:#888;
-            padding:3px 5px;
+            background-color: rgba(125,125,125,0.5);
+            padding: 4px 10px;
+            font-size: 13px;
+            font-weight: normal;
+          }
+
+          .act h1:hover:after,.act h2:hover:after,.act h3:hover:after,.act h4:hover:after,.act h5:hover:after{
+            top: -1.8em;
+          }
+
+          .act sup,.act sub{
+            font-size: 0.9em;
+            font-weight: bold;
           }
           div.count{
             padding-left:5em;
@@ -139,10 +157,22 @@ export default function DSA({ layout }: { layout: LayoutMode }) {
             -ms-transition: background-color 300ms linear;
             transition: background-color 300ms linear; }
 
-          p:hover,h1:hover,h2:hover,h3:hover,h4:hover,h5:hover,h6:hover,li:hover { background-color: rgba(155,155,155,0.3); }
-          @media (max-width: 600px) {
-            article {
-              background: blue;
+          
+          .act div,.act h1,.act h2,h3,h4,h5,h6,li { 
+            opacity: 0.7;
+          }
+
+          .act div:hover,.act h1:hover,.act h2:hover,h3:hover,h4:hover,h5:hover,h6:hover,li:hover { 
+            background-color: rgba(125,125,125,0.5); 
+            opacity: 1;
+          }
+          
+          @media screen and (min-width: 1500px) {
+            .act div:hover:after,.act li:hover:after{
+              top: -2.4em;
+            }
+            .act h1:hover:after,.act h2:hover:after,.act h3:hover:after,.act h4:hover:after,.act h5:hover:after{
+              top: -1.8em;
             }
           }
         `}</style>

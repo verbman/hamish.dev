@@ -1,6 +1,8 @@
-import Layout from '../../components/Layout'
-import { LayoutMode } from '../../lib/types'
-import dsa from '../../public/data/dsa.json'
+import { useRouter } from 'next/router'
+import Layout from '../../../components/Layout'
+import { LayoutMode } from '../../../lib/types'
+import dsaEN from './data/dsa-en.json'
+import dsaDA from './data/dsa-da.json'
 import parse from 'html-react-parser';
 
 type contentSet = {
@@ -97,6 +99,9 @@ const xEle = (h: hold, contents: contentSet) => {
 }
 
 export default function DSA({ layout }: { layout: LayoutMode }) {
+
+  const router = useRouter()
+  var dsa = (router.query.lang == "da") ? dsaDA : dsaEN;
   
   var lastIndent: number = 0;
   var thisIndent: number = 0;
@@ -112,6 +117,7 @@ export default function DSA({ layout }: { layout: LayoutMode }) {
   var notTheSamePara: boolean;
 
   var i = 0;
+
   while (i < dsa.length) {
     processed = false;
     lastIndent = i > 0 ? +dsa[i - 1].indent : 0;

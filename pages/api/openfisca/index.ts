@@ -1,15 +1,36 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import Cors from 'cors'
 import type { Data } from '../../../lib/types/kumu'
 import nc from 'next-connect';
 import fs from 'fs';
 import path from 'path';
 import kumu from '../../experiments/openfisca/data/kumu.json'
 
+const cors = Cors({
+  methods: ['GET', 'HEAD'],
+})
+
+function runMiddleware(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  fn: Function
+) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result: any) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+      return resolve(result)
+    })
+  })
+}
+
 const handler = nc();
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 
-
+  await runMiddleware(req, res, cors)
+  
   const newBuild = req.query.build && req.query.build === "true";
   let obj: Data = { elements: [], connections: [] };
 

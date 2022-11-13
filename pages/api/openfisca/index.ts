@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Cors from 'cors'
-import type { Data } from '../../../lib/types/kumu'
+import type { Data, Structure } from '../../../lib/types/kumu'
 import nc from 'next-connect';
 import fs from 'fs';
 import path from 'path';
@@ -48,12 +48,13 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
     let keys = [];
     let variableslongform = [];
 
-    let structure = [];
+    let structure: Structure[] = [];
     let variables = [];
 
     try {
       const res = await fetch(`https://raw.githubusercontent.com/digitalaotearoa/openfisca-aotearoa/main/openfisca_aotearoa/structure.json`);
-      structure = await res.json();
+      let g = await res.json();
+      structure = g.structure;
     } catch (err) {
       console.log(err);
     }
@@ -85,7 +86,7 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (variableslongform.length >= keys.length) {
 
-      var acts: string[] = [];
+      var types: string[] = [];
       var id = '';
 
       for (var v in variableslongform) {
@@ -94,10 +95,10 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
         if (c.length > 1) {
           id = c[1];
           obj.connections.push({ from: c[0], to: variableslongform[v]['id'], type: 'belongs', direction: "directed" });
-          if (!acts.includes(c[0])) {
-            acts.push(c[0]);
-            if (structure[c[0]]) {
-              var detail = structure[c[0]];
+          if (!types.includes(c[0])) {
+            types.push(c[0]);
+            if (structure.some(x => x.Prefix == c[0])) {
+              var detail = structure.find(x => x.Prefix == c[0]) as Structure;
               obj.elements.push({ id: c[0], label: detail.Title, type: detail.Type, description: '', reference: detail.Reference, source: '', valuetype: '' });
               if (detail.Children && detail.Children.length > 0) {
                 for (var z = 0; z < detail.Children.length; z++) {
@@ -110,8 +111,8 @@ handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
           }
         } else {
           obj.connections.push({ from: 'generic', to: variableslongform[v]['id'], type: 'belongs', direction: "directed" });
-          if (!acts.includes('generic')) {
-            acts.push('generic');
+          if (!types.includes('generic')) {
+            types.push('generic');
             obj.elements.push({ id: 'generic', label: 'Generic', type: 'Instrument', description: '', reference: '', source: '', valuetype: '' });
           }
         }

@@ -20,3 +20,11 @@ export type Element = {
   source: string;
   valuetype: string;
 }
+
+export type Structure = {
+  Title: string;
+  Prefix: string;
+  Type: string;
+  Reference: string;
+  Children: string[] | null;
+}

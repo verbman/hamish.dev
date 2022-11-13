@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
 import Layout from '../../../components/Layout'
 import { LayoutMode } from '../../../lib/types'
-import dsaEN from './data/dtco-en.json'
+import dtcoEN from './data/dtco-en.json'
 import parse from 'html-react-parser'
 
 type contentSet = {
@@ -99,8 +99,8 @@ const xEle = (h: hold, contents: contentSet) => {
 
 export default function DSA({ layout }: { layout: LayoutMode }) {
 
-  const router = useRouter()
-  var dsa = (router.query.lang == "da") ? dsaDA : dsaEN;
+  //const router = useRouter()
+  var dsa = dtcoEN;
   
   var lastIndent: number = 0;
   var thisIndent: number = 0;

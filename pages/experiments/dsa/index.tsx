@@ -3,7 +3,7 @@ import Layout from '../../../components/Layout'
 import { LayoutMode } from '../../../lib/types'
 import dsaEN from './data/dsa-en.json'
 import dsaDA from './data/dsa-da.json'
-import parse from 'html-react-parser';
+import parse from 'html-react-parser'
 
 type contentSet = {
   start: string | JSX.Element | JSX.Element[];
